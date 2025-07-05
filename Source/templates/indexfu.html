@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>实时监控</title>
+    <style>
+        .c2 {
+          width: 640px;
+          height: 360px;
+          border: 2px solid #ccc;
+          background-color: blue;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div>
+       <h1>摄像头1</h1>
+<!--            <img src="{{ url_for('video1') }}" width="720" />-->
+         <div class="c2"></div>
+    </div>
+    <div>
+       <h1>摄像头2</h1>
+<!--             <img src="{{ url_for('video2') }}" width="720" />-->
+             <div class="c2"></div>
+    </div>
+        <a href="{{ url_for('video_list') }}">查看最近7天视频回放</a>
+
+</body>
+</html>

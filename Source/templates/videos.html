@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>设备视频回放</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .device-section {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .device-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid #4CAF50;
+      padding-left: 10px;
+    }
+
+    .video-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .video-card {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      width: 320px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    video {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .video-name {
+      font-size: 14px;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 18px;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      font-size: 14px;
+      transition: background-color 0.3s;
+      z-index: 999;
+    }
+
+    .floating-btn:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+      .video-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>设备视频回放</h1>
+
+  {% for device in device_list %}
+    <div class="device-section">
+      <div class="device-title">{{ device.device }}</div>
+
+      {% if device.videos %}
+        <div class="video-grid">
+          {% for video in device.videos %}
+            <div class="video-card">
+              <video controls>
+                <source src="{{ video.url }}" type="video/mp4">
+                浏览器不支持 video 标签
+              </video>
+              <div class="video-name">{{ video.name }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>暂无视频</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <!-- 悬浮返回首页按钮 -->
+  <a href="{{ url_for('index') }}" class="floating-btn">返回首页</a>
+</body>
+</html>

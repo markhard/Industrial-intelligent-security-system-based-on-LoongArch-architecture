@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>全屏查看</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .fullscreen-buttons {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .fullscreen-buttons button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .fullscreen-buttons button:hover {
+      background-color: #0056b3;
+    }
+
+    .fullscreen-title {
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      z-index: 999;
+      color:red;
+      font-weight:900
+    }
+
+    .fullscreen-content {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+<!--    .fullscreen-content img {-->
+<!--      max-width: 100%;-->
+<!--      max-height: 100%;-->
+<!--      object-fit: contain;-->
+<!--    }-->
+  .fullscreen-content img {
+      width: 100vw;
+      height: 100vh;
+<!--      object-fit: cover; /* 使图片铺满屏幕，比例适配 */-->
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fullscreen-buttons">
+    <button onclick="window.location.href='{{ url_for('index') }}'">返回</button>
+  </div>
+
+  <div  class="fullscreen-title" id="fullscreenTitle">摄像头</div>
+
+  <div class="fullscreen-content">
+    <img id="fullscreenImage" src="" alt="实时画面" />
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "index.html"; // 回首页
+    }
+
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    const cam = getQueryParam("cam");
+    const image = document.getElementById("fullscreenImage");
+    const title = document.getElementById("fullscreenTitle");
+
+    if (cam === "1") {
+      image.src = "{{ url_for('video1') }}";
+      title.textContent = "摄像头 1";
+    } else if (cam === "2") {
+      image.src = "{{ url_for('video2') }}";
+      title.textContent = "摄像头 2";
+    } else {
+      title.textContent = "未知摄像头";
+    }
+  </script>
+
+</body>
+</html>

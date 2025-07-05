@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>实时监控</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .camera-card {
+      background-color: #87CEEB;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      text-align: center;
+      width: 680px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .camera-card:hover {
+      transform: scale(1.02);
+    }
+
+    .camera-card h1 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .c2 {
+      width: 640px;
+      height: 360px;
+       margin: 0px auto;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      background-color: #87ceeb;
+      overflow: hidden;
+    }
+
+    .c2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .button-container {
+      width: 300px;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    button {
+      width: 250px;
+      height: 50px;
+      font-size: 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <div class="camera-card" onclick="window.location.href='fullscreen.html?cam=1'">
+      <h1>摄像头 1</h1>
+      <div class="c2">
+        <img src="{{ url_for('video1') }}" alt="摄像头1">
+      </div>
+    </div>
+
+    <div class="camera-card" onclick="window.location.href='fullscreen.html?cam=2'">
+      <h1>摄像头 2</h1>
+      <div class="c2">
+        <img src="{{ url_for('video2') }}" alt="摄像头2">
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <a href="{{ url_for('video_list') }}">
+      <button>查看最近 7 天视频回放</button>
+    </a>
+  </div>
+
+</body>
+</html>
